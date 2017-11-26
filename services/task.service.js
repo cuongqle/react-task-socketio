@@ -23,5 +23,13 @@ exports.create = (task) => {
 };
 
 exports.update = (task) => {
-  return TaskModel.update({id: task.id}, {completed: task.completed});
+  return new Promise((res, rej) => {
+    return TaskModel.update({id: task.id}, {completed: task.completed}, (err,result) => {
+      if (err) {
+        rej(err);
+      } else {
+        res({id: task.id});
+      }
+    });
+  });
 };

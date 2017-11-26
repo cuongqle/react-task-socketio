@@ -5,7 +5,7 @@ export const taskAdded = (data) => ({
 
 export const taskCompleted = (data) => ({
   type: "TASK_COMPLETED",
-  id: data.id
+  id: data.task.id
 })
 
 export const initial = (res) => ({

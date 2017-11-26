@@ -12,7 +12,7 @@ module.exports = function (server) {
     connections.push(socket);
 
     task.getAllTasks().then((result) => {
-      socket.emit('allTasks', result);
+      io.sockets.emit('allTasks', result);
     });
 
     socket.on('disconnect', function(){
@@ -21,13 +21,13 @@ module.exports = function (server) {
 
     socket.on('addTask',(newTask)=>{
       task.create(newTask).then(result => {
-        io.emit('taskAdded', result);
+        io.sockets.emit('taskAdded', result);
       });
     });
 
     socket.on('completeTask',(completedTask)=>{
       task.update(completedTask).then(result => {
-        io.emit('taskCompleted', result);
+        io.sockets.emit('taskCompleted', result);
       });
     });
   });
